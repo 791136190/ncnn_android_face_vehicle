@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ Copyright 2014 The Android Open Source Project
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.alghu.algdemo.view.AutoFitSurfaceView
+        android:id="@+id/texture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+
+    <ImageButton
+        android:id="@+id/btInfo"
+        style="@android:style/Widget.Material.Light.Button.Borderless"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_vertical|end"
+        android:contentDescription="@string/description_info"
+        android:padding="20dp"
+        android:src="@drawable/ic_action_info" />
+
+    <ImageButton
+        android:id="@+id/btCamera"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="@string/description_info"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <Button
+        android:id="@+id/btFace"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
+        android:layout_above="@id/btChoice"
+        android:layout_alignEnd="@id/btChoice"
+        android:text="FACE" />
+
+    <Button
+        android:id="@+id/btDlpr"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
+        android:layout_above="@id/btFace"
+        android:layout_alignEnd="@id/btFace"
+        android:text="DLPR" />
+
+    <ImageButton
+        android:id="@+id/btChoice"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_above="@id/btCamera"
+        android:layout_alignEnd="@id/btCamera"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <Button
+        android:id="@+id/btRec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentBottom="true"
+        android:minWidth="64dip"
+        android:text="REC" />
+
+</RelativeLayout>

@@ -1,0 +1,29 @@
+ninja: Entering directory `E:\NCNN\ncnn_android_face_vehicle\app\.cxx\cmake\debug\armeabi-v7a'
+[1/3] Building CXX object CMakeFiles/native-lib.dir/sources/face_det.cpp.o
+clang++: warning: argument unused during compilation: '-static-openmp' [-Wunused-command-line-argument]
+E:/NCNN/ncnn_android_face_vehicle/app/src/main/jni/sources/face_det.cpp:270:85: warning: format specifies type 'unsigned long' but the argument has type 'std::__ndk1::vector<BboxFace, std::__ndk1::allocator<BboxFace> >::size_type' (aka 'unsigned int') [-Wformat]
+    LOGD("detect cost %f ms, all:%f ms, det:%lu\n", costtime, total_time/total_det, boundingBox_.size());
+                                            ~~~                                     ^~~~~~~~~~~~~~~~~~~
+                                            %u
+E:/NCNN/ncnn_android_face_vehicle/app/src/main/jni/sources/face_det.cpp:25:77: note: expanded from macro 'LOGD'
+#define LOGD(...) ((void)__android_log_print(ANDROID_LOG_DEBUG, "face_det", __VA_ARGS__))
+                                                                            ^~~~~~~~~~~
+1 warning generated.
+[2/3] Building CXX object CMakeFiles/native-lib.dir/sources/veh_det.cpp.o
+clang++: warning: argument unused during compilation: '-static-openmp' [-Wunused-command-line-argument]
+E:/NCNN/ncnn_android_face_vehicle/app/src/main/jni/sources/veh_det.cpp:389:88: warning: format specifies type 'unsigned long' but the argument has type 'std::__ndk1::vector<box_plate_, std::__ndk1::allocator<box_plate_> >::size_type' (aka 'unsigned int') [-Wformat]
+    LOGD("plate det cost %f ms, all:%f ms, det:%lu\n", costtime, total_time/total_det, boundingBox_.size());
+                                               ~~~                                     ^~~~~~~~~~~~~~~~~~~
+                                               %u
+E:/NCNN/ncnn_android_face_vehicle/app/src/main/jni/sources/veh_det.cpp:22:76: note: expanded from macro 'LOGD'
+#define LOGD(...) ((void)__android_log_print(ANDROID_LOG_DEBUG, "veh_det", __VA_ARGS__))
+                                                                           ^~~~~~~~~~~
+E:/NCNN/ncnn_android_face_vehicle/app/src/main/jni/sources/veh_det.cpp:515:89: warning: format specifies type 'unsigned long' but the argument has type 'std::__ndk1::vector<box_veh_, std::__ndk1::allocator<box_veh_> >::size_type' (aka 'unsigned int') [-Wformat]
+    LOGD("detect veh cost %f ms, all:%f ms, det:%lu\n", costtime, total_time/total_det, boundingBox_.size());
+                                                ~~~                                     ^~~~~~~~~~~~~~~~~~~
+                                                %u
+E:/NCNN/ncnn_android_face_vehicle/app/src/main/jni/sources/veh_det.cpp:22:76: note: expanded from macro 'LOGD'
+#define LOGD(...) ((void)__android_log_print(ANDROID_LOG_DEBUG, "veh_det", __VA_ARGS__))
+                                                                           ^~~~~~~~~~~
+2 warnings generated.
+[3/3] Linking CXX shared library E:\NCNN\ncnn_android_face_vehicle\app\build\intermediates\cmake\debug\obj\armeabi-v7a\libnative-lib.so

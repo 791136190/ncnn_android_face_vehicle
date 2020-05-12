@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">算法演示</string>
+    <string name="camera_error">这台设备太久不支持CameraAPI</string>
+    <string name="description_info">信息</string>
+    <string name="info_message">QQ:791136190</string>
+    <string name="request_permission">请开启摄像头/读取权限</string>
+    <string name="choice">选择摄像头或者图片</string>
+    <string name="image">图库</string>
+    <string name="camera">摄像头</string>
+    <string name="photo">拍照</string>
+    <string name="change_camera">切换前后摄像头</string>
+    <string name="change_face">切换到人脸算法</string>
+    <string name="change_lpr">切换到车辆算法</string>
+    <string name="rec_info">录入当前最高分人脸</string>
+    <string name="rec_warning">请先切换到人脸算法并且打开一种数据输入</string>
+
+</resources>

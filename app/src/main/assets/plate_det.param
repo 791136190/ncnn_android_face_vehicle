@@ -1,0 +1,62 @@
+7767517
+60 79
+Input                    data                     0 1 data
+BinaryOp                 plate__mulscalar0        1 1 data plate__mulscalar0 0=2 1=1 2=3.921000e-03
+Convolution              plate_conv0_fwd          1 1 plate__mulscalar0 plate_relu0_fwd 0=8 1=3 3=2 4=1 5=1 6=216 9=1
+Convolution              plate_conv1_fwd          1 1 plate_relu0_fwd plate_relu1_fwd 0=8 1=3 4=1 5=1 6=576 9=1
+Convolution              plate_conv2_fwd          1 1 plate_relu1_fwd plate_relu2_fwd 0=12 1=3 3=2 4=1 5=1 6=864 9=1
+Convolution              plate_conv3_fwd          1 1 plate_relu2_fwd plate_relu3_fwd 0=16 1=3 4=1 5=1 6=1728 9=1
+Convolution              plate_conv4_fwd          1 1 plate_relu3_fwd plate_relu4_fwd 0=16 1=3 3=2 4=1 5=1 6=2304 9=1
+Convolution              plate_conv5_fwd          1 1 plate_relu4_fwd plate_relu5_fwd 0=32 1=3 4=1 5=1 6=4608 9=1
+Split                    splitncnn_0              1 2 plate_relu5_fwd plate_relu5_fwd_splitncnn_0 plate_relu5_fwd_splitncnn_1
+Convolution              plate_conv6_fwd          1 1 plate_relu5_fwd_splitncnn_1 plate_relu6_fwd 0=32 1=3 3=2 4=1 5=1 6=9216 9=1
+Convolution              plate_conv7_fwd          1 1 plate_relu6_fwd plate_relu7_fwd 0=32 1=3 4=1 5=1 6=9216 9=1
+Convolution              plate_conv8_fwd          1 1 plate_relu7_fwd plate_relu8_fwd 0=32 1=3 4=1 5=1 6=9216 9=1
+Split                    splitncnn_1              1 2 plate_relu8_fwd plate_relu8_fwd_splitncnn_0 plate_relu8_fwd_splitncnn_1
+Convolution              plate_conv9_fwd          1 1 plate_relu8_fwd_splitncnn_1 plate_relu9_fwd 0=32 1=3 3=2 4=1 5=1 6=9216 9=1
+Convolution              plate_conv10_fwd         1 1 plate_relu9_fwd plate_relu10_fwd 0=32 1=3 4=1 5=1 6=9216 9=1
+Convolution              plate_conv11_fwd         1 1 plate_relu10_fwd plate_relu11_fwd 0=64 1=3 4=1 5=1 6=18432 9=1
+Convolution              plate_rou0_conv0_fwd     1 1 plate_relu11_fwd plate_rou0_relu0_fwd 0=32 1=3 4=1 5=1 6=18432 9=1
+Split                    splitncnn_2              1 3 plate_rou0_relu0_fwd plate_rou0_relu0_fwd_splitncnn_0 plate_rou0_relu0_fwd_splitncnn_1 plate_rou0_relu0_fwd_splitncnn_2
+Convolution              plate_det0_hybridsequential1_conv0_fwd 1 1 plate_rou0_relu0_fwd_splitncnn_2 plate_det0_hybridsequential1_relu0_fwd 0=8 1=3 4=1 5=1 6=2304 9=1
+Split                    splitncnn_3              1 2 plate_det0_hybridsequential1_relu0_fwd plate_det0_hybridsequential1_relu0_fwd_splitncnn_0 plate_det0_hybridsequential1_relu0_fwd_splitncnn_1
+Convolution              plate_det0_hybridsequential3_conv0_fwd 1 1 plate_det0_hybridsequential1_relu0_fwd_splitncnn_1 plate_det0_hybridsequential3_relu0_fwd 0=8 1=3 4=1 5=1 6=576 9=1
+Concat                   plate_det0_concat0       3 1 plate_rou0_relu0_fwd_splitncnn_1 plate_det0_hybridsequential1_relu0_fwd_splitncnn_0 plate_det0_hybridsequential3_relu0_fwd plate_det0_concat0
+Split                    splitncnn_4              1 4 plate_det0_concat0 plate_det0_concat0_splitncnn_0 plate_det0_concat0_splitncnn_1 plate_det0_concat0_splitncnn_2 plate_det0_concat0_splitncnn_3
+Convolution              plate_output0_conv0_fwd  1 1 plate_det0_concat0_splitncnn_3 plate_output0_conv0_fwd 0=4 1=1 5=1 6=192
+Convolution              plate_output0_conv2_fwd  1 1 plate_det0_concat0_splitncnn_2 plate_output0_conv2_fwd 0=1 1=1 5=1 6=48
+Convolution              plate_output0_conv1_fwd  1 1 plate_det0_concat0_splitncnn_1 plate_output0_conv1_fwd 0=4 1=1 5=1 6=192
+Convolution              plate_output0_conv3_fwd  1 1 plate_det0_concat0_splitncnn_0 plate_output0_conv3_fwd 0=1 1=1 5=1 6=48
+Concat                   plate_output0_out0_fwd   4 1 plate_output0_conv0_fwd plate_output0_conv2_fwd plate_output0_conv1_fwd plate_output0_conv3_fwd plate_output0_out0_fwd
+Deconvolution            plate_DecT1_fwd          1 1 plate_rou0_relu0_fwd_splitncnn_0 plate_DecB1_fwd 0=32 1=4 3=2 4=1 5=1 6=16384
+Convolution              plate_transitions1_conv0_fwd 1 1 plate_relu8_fwd_splitncnn_0 plate_transitions1_batchnorm0_fwd 0=32 1=1 5=1 6=1024
+BinaryOp                 plate_elemwise_add0      2 1 plate_DecB1_fwd plate_transitions1_batchnorm0_fwd plate_elemwise_add0
+ReLU                     plate_relu0              1 1 plate_elemwise_add0 plate_relu0
+Convolution              plate_rou1_conv0_fwd     1 1 plate_relu0 plate_rou1_relu0_fwd 0=32 1=3 4=1 5=1 6=9216 9=1
+Split                    splitncnn_5              1 3 plate_rou1_relu0_fwd plate_rou1_relu0_fwd_splitncnn_0 plate_rou1_relu0_fwd_splitncnn_1 plate_rou1_relu0_fwd_splitncnn_2
+Convolution              plate_det1_hybridsequential1_conv0_fwd 1 1 plate_rou1_relu0_fwd_splitncnn_2 plate_det1_hybridsequential1_relu0_fwd 0=8 1=3 4=1 5=1 6=2304 9=1
+Split                    splitncnn_6              1 2 plate_det1_hybridsequential1_relu0_fwd plate_det1_hybridsequential1_relu0_fwd_splitncnn_0 plate_det1_hybridsequential1_relu0_fwd_splitncnn_1
+Convolution              plate_det1_hybridsequential3_conv0_fwd 1 1 plate_det1_hybridsequential1_relu0_fwd_splitncnn_1 plate_det1_hybridsequential3_relu0_fwd 0=8 1=3 4=1 5=1 6=576 9=1
+Concat                   plate_det1_concat0       3 1 plate_rou1_relu0_fwd_splitncnn_1 plate_det1_hybridsequential1_relu0_fwd_splitncnn_0 plate_det1_hybridsequential3_relu0_fwd plate_det1_concat0
+Split                    splitncnn_7              1 4 plate_det1_concat0 plate_det1_concat0_splitncnn_0 plate_det1_concat0_splitncnn_1 plate_det1_concat0_splitncnn_2 plate_det1_concat0_splitncnn_3
+Convolution              plate_output1_conv0_fwd  1 1 plate_det1_concat0_splitncnn_3 plate_output1_conv0_fwd 0=4 1=1 5=1 6=192
+Convolution              plate_output1_conv2_fwd  1 1 plate_det1_concat0_splitncnn_2 plate_output1_conv2_fwd 0=1 1=1 5=1 6=48
+Convolution              plate_output1_conv1_fwd  1 1 plate_det1_concat0_splitncnn_1 plate_output1_conv1_fwd 0=4 1=1 5=1 6=192
+Convolution              plate_output1_conv3_fwd  1 1 plate_det1_concat0_splitncnn_0 plate_output1_conv3_fwd 0=1 1=1 5=1 6=48
+Concat                   plate_output1_out1_fwd   4 1 plate_output1_conv0_fwd plate_output1_conv2_fwd plate_output1_conv1_fwd plate_output1_conv3_fwd plate_output1_out1_fwd
+Deconvolution            plate_DecT2_fwd          1 1 plate_rou1_relu0_fwd_splitncnn_0 plate_DecB2_fwd 0=32 1=4 3=2 4=1 5=1 6=16384
+Convolution              plate_transitions2_conv0_fwd 1 1 plate_relu5_fwd_splitncnn_0 plate_transitions2_batchnorm0_fwd 0=32 1=1 5=1 6=1024
+BinaryOp                 plate_elemwise_add1      2 1 plate_DecB2_fwd plate_transitions2_batchnorm0_fwd plate_elemwise_add1
+ReLU                     plate_relu1              1 1 plate_elemwise_add1 plate_relu1
+Convolution              plate_rou2_conv0_fwd     1 1 plate_relu1 plate_rou2_relu0_fwd 0=32 1=3 4=1 5=1 6=9216 9=1
+Split                    splitncnn_8              1 2 plate_rou2_relu0_fwd plate_rou2_relu0_fwd_splitncnn_0 plate_rou2_relu0_fwd_splitncnn_1
+Convolution              plate_det2_hybridsequential1_conv0_fwd 1 1 plate_rou2_relu0_fwd_splitncnn_1 plate_det2_hybridsequential1_relu0_fwd 0=8 1=3 4=1 5=1 6=2304 9=1
+Split                    splitncnn_9              1 2 plate_det2_hybridsequential1_relu0_fwd plate_det2_hybridsequential1_relu0_fwd_splitncnn_0 plate_det2_hybridsequential1_relu0_fwd_splitncnn_1
+Convolution              plate_det2_hybridsequential3_conv0_fwd 1 1 plate_det2_hybridsequential1_relu0_fwd_splitncnn_1 plate_det2_hybridsequential3_relu0_fwd 0=8 1=3 4=1 5=1 6=576 9=1
+Concat                   plate_det2_concat0       3 1 plate_rou2_relu0_fwd_splitncnn_0 plate_det2_hybridsequential1_relu0_fwd_splitncnn_0 plate_det2_hybridsequential3_relu0_fwd plate_det2_concat0
+Split                    splitncnn_10             1 4 plate_det2_concat0 plate_det2_concat0_splitncnn_0 plate_det2_concat0_splitncnn_1 plate_det2_concat0_splitncnn_2 plate_det2_concat0_splitncnn_3
+Convolution              plate_output2_conv0_fwd  1 1 plate_det2_concat0_splitncnn_3 plate_output2_conv0_fwd 0=4 1=1 5=1 6=192
+Convolution              plate_output2_conv2_fwd  1 1 plate_det2_concat0_splitncnn_2 plate_output2_conv2_fwd 0=1 1=1 5=1 6=48
+Convolution              plate_output2_conv1_fwd  1 1 plate_det2_concat0_splitncnn_1 plate_output2_conv1_fwd 0=4 1=1 5=1 6=192
+Convolution              plate_output2_conv3_fwd  1 1 plate_det2_concat0_splitncnn_0 plate_output2_conv3_fwd 0=1 1=1 5=1 6=48
+Concat                   plate_output2_out2_fwd   4 1 plate_output2_conv0_fwd plate_output2_conv2_fwd plate_output2_conv1_fwd plate_output2_conv3_fwd plate_output2_out2_fwd

@@ -1,0 +1,13 @@
+[
+{
+  "directory": "E:/ALG_Android_Demo/app/.cxx/cmake/release/armeabi-v7a",
+  "command": "D:\\Andriod\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi24 --gcc-toolchain=D:/Andriod/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/Andriod/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dnative_lib_EXPORTS -IE:/ALG_Android_Demo/app/src/main/jni/./ncnn-android-lib/include -IE:/ALG_Android_Demo/app/src/main/jni/./headers  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11  -static-openmp -frtti -fexceptions -fopenmp=libomp -Oz -DNDEBUG  -fPIC   -o CMakeFiles\\native-lib.dir\\sources\\face_det.cpp.o -c E:\\ALG_Android_Demo\\app\\src\\main\\jni\\sources\\face_det.cpp",
+  "file": "E:\\ALG_Android_Demo\\app\\src\\main\\jni\\sources\\face_det.cpp"
+},
+
+{
+  "directory": "E:/ALG_Android_Demo/app/.cxx/cmake/release/armeabi-v7a",
+  "command": "D:\\Andriod\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi24 --gcc-toolchain=D:/Andriod/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/Andriod/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dnative_lib_EXPORTS -IE:/ALG_Android_Demo/app/src/main/jni/./ncnn-android-lib/include -IE:/ALG_Android_Demo/app/src/main/jni/./headers  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11  -static-openmp -frtti -fexceptions -fopenmp=libomp -Oz -DNDEBUG  -fPIC   -o CMakeFiles\\native-lib.dir\\sources\\veh_det.cpp.o -c E:\\ALG_Android_Demo\\app\\src\\main\\jni\\sources\\veh_det.cpp",
+  "file": "E:\\ALG_Android_Demo\\app\\src\\main\\jni\\sources\\veh_det.cpp"
+}
+]

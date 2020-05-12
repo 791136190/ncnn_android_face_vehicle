@@ -1,0 +1,5 @@
+# ninja log v5
+1	1704	610975252	CMakeFiles/native-lib.dir/sources/face_det.cpp.o	2b60a8a6935a31c
+9	1922	610975252	CMakeFiles/native-lib.dir/sources/veh_det.cpp.o	de808cc39eeffcf0
+1922	2757	610975253	E:/NCNN/ncnn_android_face_vehicle/app/build/intermediates/cmake/debug/obj/arm64-v8a/libnative-lib.so	1acc81ea7fcd8436
+0	15	0	clean	83b331a48639da77

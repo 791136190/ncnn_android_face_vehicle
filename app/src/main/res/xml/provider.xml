@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <files-path
+        name="my_images"
+        path="Pictures" />
+    <!--<external-path>    可被替换成<external-files-path>、<external-cache-path>、<file-path>、<cache-path>等。下面给出五个的区别：-->
+    <!--<external-path>：共享外部存储卡，对应/storage/emulated/0目录，即Environment..getExternalStorageDirectory()-->
+    <!--<external-files-path>：共享外部存储的文件目录，对应/storage/emulated/0/Android/data/包名/files，即Context.getExternalFilesDir()-->
+    <!--<external-cache-path>：共享外部存储的缓存目录，对应/storage/emulated/0/Android/data/包名/cache，即Context.getExternalCacheDir()-->
+    <!--<file-path>：共享内部文件存储目录，对应 /data/data/包名/files目录，即Context.getFilesDir()-->
+    <!--<cache-path>：共享内部缓存目录，对应 /data/data/包名/cache目录，即Context.getCacheDir()-->
+    <!--name：随便定义-->
+    <!--path ：需要临时授权访问的路径。可以为空，表示指定目录下的所有文件、文件夹都可以被共享-->
+</paths>
