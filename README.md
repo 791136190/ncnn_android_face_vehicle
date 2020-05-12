@@ -10,3 +10,9 @@ MobileNetSSD_Demo_AndroidNCNN:https://github.com/chentyjpm/MobileNetSSD_Demo_And
 代码实现的是ncnn在Android的流程测试，模型精度堪忧，如果需要更高精度的模型可以取开源代码自行训练
 
 人脸识别和车牌识别均省去了对齐的步骤，如有需要自行增加
+
+NDK:21
+
+Andriod Studio:3.5.0
+
+phone:荣耀v10 with Android 10.0
