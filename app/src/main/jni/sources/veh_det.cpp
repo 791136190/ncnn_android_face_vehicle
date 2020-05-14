@@ -42,6 +42,7 @@
 
 #endif // NCNN_VULKAN
 
+#include "huAlgImgProc.h"
 #include "veh_det.h"
 //#include "veh.det.mem.h"
 //#include "plate.det.mem.h"
@@ -521,7 +522,14 @@ static struct std::vector<BboxVeh> veh_det_run(const unsigned char* pixels, int 
 {
     std::vector<BboxVeh> BoxAll;
 
-    ncnn::Mat InPutImg = ncnn::Mat::from_pixels_resize(pixels, ncnn::Mat::PIXEL_GRAY2RGB, src_w, src_h, src_w, src_h);//这里不缩放 原图上扣车牌识别的小图
+//    ncnn::Mat InPutImg = ncnn::Mat::from_pixels_resize(pixels, ncnn::Mat::PIXEL_GRAY2RGB, src_w, src_h, src_w, src_h);//这里不缩放 原图上扣车牌识别的小图
+    unsigned  char * pRgbBuf = (unsigned char*)malloc(src_w * src_h * 3);
+
+//    alg_yuv4202rgbplane((unsigned char* )pixels, src_w, src_h, pRgbBuf);
+    ncnn::yuv420sp2rgb(pixels, src_w, src_h, pRgbBuf);
+    ncnn::Mat InPutImg = ncnn::Mat::from_pixels(pRgbBuf, ncnn::Mat::PIXEL_RGB, src_w, src_h);//这里不缩放 原图上扣车牌识别的小图
+
+    free(pRgbBuf);
 
     std::vector<box_veh_> veh_box = veh_det(InPutImg, veh_det_w, veh_det_h);
 

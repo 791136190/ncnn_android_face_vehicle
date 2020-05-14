@@ -28,6 +28,8 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
+        ./sources/huAlgMemSys.cpp
+        ./sources/huAlgImgProc.cpp
         ./sources/face_det.cpp
         ./sources/veh_det.cpp)
 

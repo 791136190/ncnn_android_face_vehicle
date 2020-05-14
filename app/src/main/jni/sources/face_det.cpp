@@ -28,6 +28,7 @@
 #define LOGE(...) ((void)__android_log_print(ANDROID_LOG_ERROR, "face_det", __VA_ARGS__))
 
 #include <map>
+#include <huAlgImgProc.h>
 #include "platform.h"
 #include "net.h"
 
@@ -43,6 +44,7 @@ static GlobalGpuInstance g_global_gpu_instance;
 
 #endif // NCNN_VULKAN
 
+#include "huAlgImgProc.h"
 #include "face_det.h"
 //#include "face.det.mem.h"
 //#include "face.attr.mem.h"
@@ -143,7 +145,14 @@ static struct std::vector<BboxFace> face_det_run(const unsigned char* pixels, in
     gettimeofday(&start, NULL);
 
 //    LOGD("detect img %d X %d -> %d X %d, \n", w, h, face_det_w, face_det_h);
-    ncnn::Mat in = ncnn::Mat::from_pixels_resize(pixels, ncnn::Mat::PIXEL_GRAY2RGB, src_w, src_h, face_det_w, face_det_h);
+
+    unsigned  char * pRgbBuf = (unsigned char*)malloc(src_w * src_h * 3);
+
+//    alg_yuv4202rgbplane((unsigned char* )pixels, src_w, src_h, pRgbBuf);
+    ncnn::yuv420sp2rgb(pixels, src_w, src_h, pRgbBuf);
+    ncnn::Mat in = ncnn::Mat::from_pixels_resize(pRgbBuf, ncnn::Mat::PIXEL_RGB, src_w, src_h, face_det_w, face_det_h);
+
+    free(pRgbBuf);
 
 //    const float mean_vals[3] = {127.5f, 127.5f, 127.5f};
 //    const float norm_vals[3] = {1.0 / 127.5, 1.0 / 127.5, 1.0 / 127.5};
