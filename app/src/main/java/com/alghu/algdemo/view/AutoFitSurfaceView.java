@@ -168,8 +168,8 @@ public class AutoFitSurfaceView extends SurfaceView implements SurfaceHolder.Cal
 
         mCanvas.drawText("fps:" + String.format("%.2f",1000.0f / nFpsTime), 20, 40, paint);
     }
-    static private int class_color[] = { Color.GREEN , Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.RED, Color.GREEN};
-    static private String class_names[] = {"face", "car", "bus", "truck", "motorcycle", "plate", "background" };
+    static private int class_color[] = { Color.GREEN , Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.RED, Color.GREEN, Color.BLACK};
+    static private String class_names[] = {"face", "car", "bus", "truck", "motorcycle", "plate", "head", "background" };
     static private String plate_names[] = {
             "京", "沪", "津", "渝", "冀", "晋", "蒙", "辽", "吉", "黑",
             "苏", "浙", "皖", "闽", "赣", "鲁", "豫", "鄂", "湘", "粤",
@@ -418,6 +418,89 @@ public class AutoFitSurfaceView extends SurfaceView implements SurfaceHolder.Cal
         }
     }
 
+    public void DrawDetectHead(float[] data, int width, int height, int max_num, int max_len) {
+        for (int i = 0 ; i < max_num ; i++)
+        {
+            int prob = (int)(data[i * max_len + 1]);
+            if (prob > 0)
+            {
+                int t = (int) data[i * max_len] + 6;
+                int x =  Math.max(0, (int) (data[i * max_len + 2] * width));
+                int y = Math.max(0, (int) (data[i * max_len + 3] * height));
+                int xe = Math.min(width, (int) (data[i * max_len + 4] * width));
+                int ye = Math.min(height, (int) (data[i * max_len + 5] * height));
+
+                Log.d(TAG, "obj" + i +" " + t +" " + prob+ " pos" + x + " " + y + " " + xe + " " + ye);
+                DrawRect(new Rect(x,y,xe,ye),class_color[t], class_names[t] + " " + prob);
+
+//                prob = (int)(data[i * max_len + 7]);
+//                if (prob > 0)
+//                {
+//                    t = (int) data[i * max_len + 6] + 5;
+//                    x =  Math.max(0, (int) (data[i * max_len + 8] * width));
+//                    y = Math.max(0, (int) (data[i * max_len + 9] * height));
+//                    xe = Math.min(width, (int) (data[i * max_len + 10] * width));
+//                    ye = Math.min(height, (int) (data[i * max_len + 11] * height));
+//
+//                    Log.d(TAG, "obj" + i +" " + t +" " + prob+ " pos" + x + " " + y + " " + xe + " " + ye);
+//                    DrawRect(new Rect(x,y,xe,ye),class_color[t], class_names[t] + " " + prob);
+//
+//                    for (int index = 0; index < 8; index++)
+//                    {
+//                        int idx = (int) (data[i * max_len + 12 + index]);
+//                        paint.setColor(Color.GREEN) ;
+//                        paint.setStyle(Paint.Style.STROKE);
+//                        paint.setTextSize(48f);
+//                        paint.setStrokeWidth(5f);
+//                        paint.setStyle(Paint.Style.FILL);
+//                        if(idx < plate_names.length)
+//                        {
+//                            mCanvas.drawText(plate_names[idx], x + 150 + index * 45, y - 10, paint);
+//                        }
+//                    }
+//                }
+
+            }
+        }
+    }
+
+    public void DrawHeadInfo(byte[] data, int width, int height, float[] result, long nFpsTime, int max_num, int max_len) {
+        Log.d(TAG, "draw "+data.length +" " + width + "X" + height + nFpsTime);
+        if (data != null) {
+
+            mBitmap = yuvToBitmap(data,width,height);
+            if (mBitmap == null) {
+                Log.d(TAG, "data data is to bitmap error");
+                return;
+            }
+
+            try {
+                mCanvas = mHolder.lockCanvas();
+                mWidth = mCanvas.getWidth();
+                mHeight = mCanvas.getHeight();
+                Log.d(TAG, "canvas size is " +  mWidth+ " " + mHeight);
+                float scaleWidth = mWidth/width;
+                float scaleHeight = mHeight/height;
+                Log.d(TAG, "scale size is " +  scaleWidth+ " " +  scaleHeight);
+
+                Matrix matrix = new Matrix();
+                matrix.setScale(scaleWidth, scaleHeight);
+                mCanvas.drawBitmap(mBitmap, matrix, paint);
+
+                DrawDetectHead(result, (int)mWidth, (int)mHeight, max_num, max_len);
+                DrawFps(nFpsTime);
+
+            }catch (Exception e){
+                Log.d(TAG, "e="+e);
+                mHolder.unlockCanvasAndPost(mCanvas);
+                return;
+            }
+            mHolder.unlockCanvasAndPost(mCanvas);
+        } else {
+            Log.d(TAG, "data data is null");
+            return;
+        }
+    }
     public void DrawBitmap(Bitmap data, int width, int height) {
         if (data != null) {
             mBitmap = data;

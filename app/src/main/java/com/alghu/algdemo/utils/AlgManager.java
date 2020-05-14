@@ -92,4 +92,10 @@ public class AlgManager {
     public static native int InitVehModelFromFile(String VehDetParamPath, String VehDetBinPath, String PlateDetParamPath, String PlateDetBinPath, String PlateRecParamPath, String PlateRecBinPath, int runOnWhere, int runWidth, int runHeight);
     public static native int UinitVehModel(int runOnWhere);
     public static native float[] RunVehModeByYuv(byte[] YuvData, int SrcWidth, int SrcHeight, float[] OutputBuffer);
+
+    //######################################
+    public static native int InitHeadModelFromFile(String HeadDetParamPath, String HeadDetBinPath, int runOnWhere, int runWidth, int runHeight);
+    public static native int UinitHeadModel(int runOnWhere);
+    public static native float[] RunHeadModeByYuv(byte[] YuvData, int SrcWidth, int SrcHeight, float[] OutputBuffer);
+
 }

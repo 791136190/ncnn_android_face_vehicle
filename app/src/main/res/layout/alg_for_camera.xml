@@ -81,4 +81,14 @@
         android:minWidth="64dip"
         android:text="REC" />
 
+    <Button
+        android:id="@+id/btHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btDlpr"
+        android:layout_alignEnd="@id/btDlpr"
+        android:layout_alignParentEnd="false"
+        android:minWidth="64dip"
+        android:text="HEAD" />
+
 </RelativeLayout>

@@ -14,5 +14,6 @@
     <string name="change_lpr">切换到车辆算法</string>
     <string name="rec_info">录入当前最高分人脸</string>
     <string name="rec_warning">请先切换到人脸算法并且打开一种数据输入</string>
+    <string name="change_head">切换到头部算法</string>
 
 </resources>

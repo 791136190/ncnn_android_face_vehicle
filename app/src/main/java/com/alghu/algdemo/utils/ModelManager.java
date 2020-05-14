@@ -328,4 +328,21 @@ public class ModelManager implements Serializable{
     }
 
     // ####################################################
+    private String HeadDetModelData = "";
+    private String HeadDetModelParam = "";
+
+    public String getHeadDetModelData() {
+        return HeadDetModelData;
+    }
+    public void setHeadDetModelData(String HeadDetmodeldata) {
+        this.HeadDetModelData = HeadDetmodeldata;
+    }
+
+    public String getHeadDetModelParam() {
+        return HeadDetModelParam;
+    }
+    public void setHeadDetModelParam(String HeadDetmodelparam) {
+        this.HeadDetModelParam = HeadDetmodelparam;
+    }
+    // ####################################################
 }

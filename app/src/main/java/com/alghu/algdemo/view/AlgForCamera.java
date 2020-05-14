@@ -134,6 +134,7 @@ public class AlgForCamera extends Fragment implements View.OnClickListener, Acti
         view.findViewById(R.id.btCamera).setOnClickListener(this);
         view.findViewById(R.id.btFace).setOnClickListener(this);
         view.findViewById(R.id.btDlpr).setOnClickListener(this);
+        view.findViewById(R.id.btHead).setOnClickListener(this);
         view.findViewById(R.id.btRec).setOnClickListener(this);
 
         DrawSurface = (AutoFitSurfaceView) view.findViewById(R.id.texture);
@@ -232,6 +233,17 @@ public class AlgForCamera extends Fragment implements View.OnClickListener, Acti
                     Toast.makeText(activity, R.string.change_lpr, Toast.LENGTH_SHORT).show();
                     DestoryAlg();
                     InitAlg(Constant.ALG_RUN_DLPR);
+                }
+                break;
+            }
+
+            case R.id.btHead:{
+                Activity activity = getActivity();
+                if(null != activity)
+                {
+                    Toast.makeText(activity, R.string.change_head, Toast.LENGTH_SHORT).show();
+                    DestoryAlg();
+                    InitAlg(Constant.ALG_RUN_HEAD);
                 }
                 break;
             }
@@ -544,6 +556,14 @@ public class AlgForCamera extends Fragment implements View.OnClickListener, Acti
                 long FpsTime = det_out.getFpsTime();
 
                 DrawSurface.DrawVehicleInfo(cur_camera_yuv, GlobalImageSize.getWidth(), GlobalImageSize.getHeight(), Detect_result, FpsTime, Constant.MAX_VEH_NUM, Constant.MAX_VEH_LEN);
+            }
+            else if(AlgMode == Constant.ALG_RUN_HEAD)
+            {
+                DetOutManager det_out = RunAlg(cur_camera_yuv, GlobalImageSize.getWidth(), GlobalImageSize.getHeight());
+                float[] Detect_result = det_out.getDetInfo();
+                long FpsTime = det_out.getFpsTime();
+
+                DrawSurface.DrawHeadInfo(cur_camera_yuv, GlobalImageSize.getWidth(), GlobalImageSize.getHeight(), Detect_result, FpsTime, Constant.MAX_HEAD_NUM, Constant.MAX_HEAD_LEN);
             }
             else
             {
@@ -953,6 +973,28 @@ public class AlgForCamera extends Fragment implements View.OnClickListener, Acti
 
             AlgMode = Constant.ALG_RUN_DLPR;
         }
+        else if(algMode == Constant.ALG_RUN_HEAD)
+        {
+            ModelInfo.setHeadDetModelParam("head_det.param");
+            ModelInfo.setHeadDetModelData("head_det.bin");
+            
+            AssetManager am = getActivity().getAssets();
+            
+            Untils.copyModelsFromAssetToAppModelsByBuffer(am, ModelInfo.getHeadDetModelParam(), ModelInfo.getModelSaveDir());
+            Untils.copyModelsFromAssetToAppModelsByBuffer(am, ModelInfo.getHeadDetModelData(), ModelInfo.getModelSaveDir());
+
+            ModelInfo.setInput_C(3);
+            ModelInfo.setInput_H(360);
+            ModelInfo.setInput_W(480);
+
+            AlgManager.InitHeadModelFromFile(
+                    ModelInfo.getModelSaveDir()+ModelInfo.getHeadDetModelParam(),
+                    ModelInfo.getModelSaveDir()+ModelInfo.getHeadDetModelData(),
+                    ModelInfo.getRun_On_Where(), ModelInfo.getInput_W(), ModelInfo.getInput_H());
+
+            AlgMode = Constant.ALG_RUN_HEAD;
+        }
+        
         ModelLock.unlock();
     }
 
@@ -971,6 +1013,10 @@ public class AlgForCamera extends Fragment implements View.OnClickListener, Acti
         else if(AlgMode == Constant.ALG_RUN_DLPR)
         {
             AlgManager.UinitVehModel(ModelInfo.getRun_On_Where());
+        }
+        else if(AlgMode == Constant.ALG_RUN_HEAD)
+        {
+            AlgManager.UinitHeadModel(ModelInfo.getRun_On_Where());
         }
 
         AlgMode = -1;
@@ -998,6 +1044,11 @@ public class AlgForCamera extends Fragment implements View.OnClickListener, Acti
         else if (AlgMode == Constant.ALG_RUN_DLPR){
             float[] output = new float[Constant.MAX_VEH_NUM * Constant.MAX_VEH_LEN];
             float[] det_out = AlgManager.RunVehModeByYuv(YuvData, SrcWidth, SrcHeight, output);
+            det_info.setDetInfo(det_out);
+        }
+        else if(AlgMode == Constant.ALG_RUN_HEAD){
+            float[] output = new float[Constant.MAX_HEAD_NUM * Constant.MAX_HEAD_LEN];
+            float[] det_out = AlgManager.RunHeadModeByYuv(YuvData, SrcWidth, SrcHeight, output);
             det_info.setDetInfo(det_out);
         }
 

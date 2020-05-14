@@ -11,7 +11,8 @@
     <string name="info_message">QQ:791136190</string>
     <string name="change_camera">Will change camera</string>
     <string name="change_face">Will change to face algorithm</string>
-    <string name="change_lpr">Will change lpr algorithm</string>
+    <string name="change_lpr">Will change to lpr algorithm</string>
     <string name="rec_info">Record the current highest score face</string>
     <string name="rec_warning">Change to face algorithm first and open data</string>
+    <string name="change_head">Will change to head algorithm</string>
 </resources>
